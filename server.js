@@ -22,13 +22,41 @@ const limiter = rateLimit({
   max: 100, // الحد الأقصى للطلبات لكل IP
   standardHeaders: true,
   legacyHeaders: false,
-  message: { success: false, message: 'تم تجاوز الحد المسموح من الطلبات، يرجى المحاولة لاحقاً' }
+  message: { success: false, message: 'تم تجاوز الحد المسموح من الطلبات، يرجى المحاولة لاحقاً' },
+  skip: (req) => {
+    // تجاهل حدود الطلبات للملفات الثابتة
+    return req.url.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/i);
+  }
+});
+
+// حدود طلبات أكثر صرامة لـ API الحساسة
+const strictLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 دقيقة
+  max: 20, // حد أقل للعمليات الحساسة
+  message: { success: false, message: 'تم تجاوز الحد المسموح للعمليات الحساسة' }
 });
 
 // Middleware
 app.use(helmet({
-  contentSecurityPolicy: false, // تعطيل سياسة أمان المحتوى لتجنب مشاكل مع الخرائط
-  crossOriginEmbedderPolicy: false // تعطيل سياسة تضمين المصادر المتعددة
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://unpkg.com", "https://cdnjs.cloudflare.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://unpkg.com", "https://cdnjs.cloudflare.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https:"],
+      fontSrc: ["'self'", "data:", "https:"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"]
+    }
+  },
+  crossOriginEmbedderPolicy: false,
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  }
 }));
 app.use(compression()); // ضغط الاستجابات
 app.use(cors());
@@ -61,7 +89,7 @@ app.use(express.static('.', {
 }));
 
 // API لحفظ بيانات الأمراض (بديل عن save_diseases_data.php)
-app.post('/api/save-diseases-data', async (req, res) => {
+app.post('/api/save-diseases-data', strictLimiter, async (req, res) => {
   try {
     const data = req.body;
     
@@ -121,7 +149,7 @@ app.get('/api/diseases-data', async (req, res) => {
 });
 
 // API لرفع ملفات Excel ومعالجتها
-app.post('/api/upload-excel', upload.single('file'), async (req, res) => {
+app.post('/api/upload-excel', strictLimiter, upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({
