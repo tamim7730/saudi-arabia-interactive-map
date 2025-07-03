@@ -1,0 +1,707 @@
+{
+  "diseases": {
+    "rift_valley_fever": {
+      "id": "rift_valley_fever",
+      "name_ar": "حمى الوادي المتصدع",
+      "name_en": "Rift Valley Fever",
+      "description": "مرض فيروسي يصيب الحيوانات والإنسان",
+      "regions_data": {
+        "منطقة جازان": {
+          "livestock_count": {
+            "cattle": 15420,
+            "goats": 89650,
+            "sheep": 125300,
+            "camels": 8900,
+            "horses": 1200
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 6200,
+              "female": 9220,
+              "young": 3500
+            },
+            "goats": {
+              "male": 35860,
+              "female": 53790,
+              "young": 22100
+            },
+            "sheep": {
+              "male": 50120,
+              "female": 75180,
+              "young": 31200
+            },
+            "camels": {
+              "male": 3560,
+              "female": 5340,
+              "young": 1800
+            },
+            "horses": {
+              "male": 480,
+              "female": 720,
+              "young": 240
+            }
+          },
+          "positive_foci": {
+            "total_foci": 0,
+            "active_foci": 0,
+            "controlled_foci": 0,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 0,
+            "confirmed_negative": 0,
+            "under_investigation": 0
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة الرياض": {
+          "livestock_count": {
+            "cattle": 25800,
+            "goats": 145200,
+            "sheep": 198500,
+            "camels": 12400,
+            "horses": 2100
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 10320,
+              "female": 15480,
+              "young": 5800
+            },
+            "goats": {
+              "male": 58080,
+              "female": 87120,
+              "young": 36200
+            },
+            "sheep": {
+              "male": 79400,
+              "female": 119100,
+              "young": 49500
+            },
+            "camels": {
+              "male": 4960,
+              "female": 7440,
+              "young": 2480
+            },
+            "horses": {
+              "male": 840,
+              "female": 1260,
+              "young": 420
+            }
+          },
+          "positive_foci": {
+            "total_foci": 5,
+            "active_foci": 2,
+            "controlled_foci": 3,
+            "foci_details": [
+              {
+                "id": "RYD-2024-001",
+                "location": "الدرعية",
+                "status": "active",
+                "animals_affected": 1830,
+                "date_reported": "2024-01-15"
+              },
+              {
+                "id": "RYD-2024-002",
+                "location": "الخرج",
+                "status": "controlled",
+                "animals_affected": 920,
+                "date_reported": "2024-02-10"
+              }
+            ]
+          },
+          "negative_foci": {
+            "total_investigated": 332,
+            "confirmed_negative": 327,
+            "under_investigation": 5
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة نجران": {
+          "livestock_count": {
+            "cattle": 18900,
+            "goats": 95400,
+            "sheep": 142800,
+            "camels": 15600,
+            "horses": 890
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 7560,
+              "female": 11340,
+              "young": 3780
+            },
+            "goats": {
+              "male": 38160,
+              "female": 57240,
+              "young": 23800
+            },
+            "sheep": {
+              "male": 57120,
+              "female": 85680,
+              "young": 35600
+            },
+            "camels": {
+              "male": 6240,
+              "female": 9360,
+              "young": 3120
+            },
+            "horses": {
+              "male": 356,
+              "female": 534,
+              "young": 178
+            }
+          },
+          "positive_foci": {
+            "total_foci": 3,
+            "active_foci": 1,
+            "controlled_foci": 2,
+            "foci_details": [
+              {
+                "id": "NJR-2024-001",
+                "location": "شرورة",
+                "status": "controlled",
+                "animals_affected": 650,
+                "date_reported": "2024-03-05"
+              }
+            ]
+          },
+          "negative_foci": {
+            "total_investigated": 245,
+            "confirmed_negative": 242,
+            "under_investigation": 3
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة مكة المكرمة": {
+          "livestock_count": {
+            "cattle": 22400,
+            "goats": 118500,
+            "sheep": 165200,
+            "camels": 9800,
+            "horses": 1650
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 8960,
+              "female": 13440,
+              "young": 4480
+            },
+            "goats": {
+              "male": 47400,
+              "female": 71100,
+              "young": 29550
+            },
+            "sheep": {
+              "male": 66080,
+              "female": 99120,
+              "young": 41200
+            },
+            "camels": {
+              "male": 3920,
+              "female": 5880,
+              "young": 1960
+            },
+            "horses": {
+              "male": 660,
+              "female": 990,
+              "young": 330
+            }
+          },
+          "positive_foci": {
+            "total_foci": 2,
+            "active_foci": 0,
+            "controlled_foci": 2,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 189,
+            "confirmed_negative": 187,
+            "under_investigation": 2
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة المدينة المنورة": {
+          "livestock_count": {
+            "cattle": 16800,
+            "goats": 92300,
+            "sheep": 134500,
+            "camels": 11200,
+            "horses": 980
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 6720,
+              "female": 10080,
+              "young": 3360
+            },
+            "goats": {
+              "male": 36920,
+              "female": 55380,
+              "young": 23015
+            },
+            "sheep": {
+              "male": 53800,
+              "female": 80700,
+              "young": 33550
+            },
+            "camels": {
+              "male": 4480,
+              "female": 6720,
+              "young": 2240
+            },
+            "horses": {
+              "male": 392,
+              "female": 588,
+              "young": 196
+            }
+          },
+          "positive_foci": {
+            "total_foci": 1,
+            "active_foci": 0,
+            "controlled_foci": 1,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 156,
+            "confirmed_negative": 155,
+            "under_investigation": 1
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة القصيم": {
+          "livestock_count": {
+            "cattle": 19500,
+            "goats": 105800,
+            "sheep": 148200,
+            "camels": 13400,
+            "horses": 1120
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 7800,
+              "female": 11700,
+              "young": 3900
+            },
+            "goats": {
+              "male": 42320,
+              "female": 63480,
+              "young": 26390
+            },
+            "sheep": {
+              "male": 59280,
+              "female": 88920,
+              "young": 36960
+            },
+            "camels": {
+              "male": 5360,
+              "female": 8040,
+              "young": 2680
+            },
+            "horses": {
+              "male": 448,
+              "female": 672,
+              "young": 224
+            }
+          },
+          "positive_foci": {
+            "total_foci": 4,
+            "active_foci": 1,
+            "controlled_foci": 3,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 278,
+            "confirmed_negative": 274,
+            "under_investigation": 4
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "المنطقة الشرقية": {
+          "livestock_count": {
+            "cattle": 28900,
+            "goats": 156200,
+            "sheep": 212800,
+            "camels": 16800,
+            "horses": 2450
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 11560,
+              "female": 17340,
+              "young": 5780
+            },
+            "goats": {
+              "male": 62480,
+              "female": 93720,
+              "young": 38960
+            },
+            "sheep": {
+              "male": 85120,
+              "female": 127680,
+              "young": 53120
+            },
+            "camels": {
+              "male": 6720,
+              "female": 10080,
+              "young": 3360
+            },
+            "horses": {
+              "male": 980,
+              "female": 1470,
+              "young": 490
+            }
+          },
+          "positive_foci": {
+            "total_foci": 6,
+            "active_foci": 2,
+            "controlled_foci": 4,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 412,
+            "confirmed_negative": 406,
+            "under_investigation": 6
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة عسير": {
+          "livestock_count": {
+            "cattle": 21200,
+            "goats": 112400,
+            "sheep": 158600,
+            "camels": 8900,
+            "horses": 1340
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 8480,
+              "female": 12720,
+              "young": 4240
+            },
+            "goats": {
+              "male": 44960,
+              "female": 67440,
+              "young": 28020
+            },
+            "sheep": {
+              "male": 63440,
+              "female": 95160,
+              "young": 39580
+            },
+            "camels": {
+              "male": 3560,
+              "female": 5340,
+              "young": 1780
+            },
+            "horses": {
+              "male": 536,
+              "female": 804,
+              "young": 268
+            }
+          },
+          "positive_foci": {
+            "total_foci": 3,
+            "active_foci": 1,
+            "controlled_foci": 2,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 198,
+            "confirmed_negative": 195,
+            "under_investigation": 3
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة تبوك": {
+          "livestock_count": {
+            "cattle": 14600,
+            "goats": 78900,
+            "sheep": 115800,
+            "camels": 18200,
+            "horses": 890
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 5840,
+              "female": 8760,
+              "young": 2920
+            },
+            "goats": {
+              "male": 31560,
+              "female": 47340,
+              "young": 19685
+            },
+            "sheep": {
+              "male": 46320,
+              "female": 69480,
+              "young": 28890
+            },
+            "camels": {
+              "male": 7280,
+              "female": 10920,
+              "young": 3640
+            },
+            "horses": {
+              "male": 356,
+              "female": 534,
+              "young": 178
+            }
+          },
+          "positive_foci": {
+            "total_foci": 2,
+            "active_foci": 0,
+            "controlled_foci": 2,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 134,
+            "confirmed_negative": 132,
+            "under_investigation": 2
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة حائل": {
+          "livestock_count": {
+            "cattle": 17800,
+            "goats": 95600,
+            "sheep": 138400,
+            "camels": 21500,
+            "horses": 1180
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 7120,
+              "female": 10680,
+              "young": 3560
+            },
+            "goats": {
+              "male": 38240,
+              "female": 57360,
+              "young": 23840
+            },
+            "sheep": {
+              "male": 55360,
+              "female": 83040,
+              "young": 34520
+            },
+            "camels": {
+              "male": 8600,
+              "female": 12900,
+              "young": 4300
+            },
+            "horses": {
+              "male": 472,
+              "female": 708,
+              "young": 236
+            }
+          },
+          "positive_foci": {
+            "total_foci": 1,
+            "active_foci": 0,
+            "controlled_foci": 1,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 167,
+            "confirmed_negative": 166,
+            "under_investigation": 1
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة الحدود الشمالية": {
+          "livestock_count": {
+            "cattle": 12400,
+            "goats": 68900,
+            "sheep": 98500,
+            "camels": 15600,
+            "horses": 720
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 4960,
+              "female": 7440,
+              "young": 2480
+            },
+            "goats": {
+              "male": 27560,
+              "female": 41340,
+              "young": 17185
+            },
+            "sheep": {
+              "male": 39400,
+              "female": 59100,
+              "young": 24575
+            },
+            "camels": {
+              "male": 6240,
+              "female": 9360,
+              "young": 3120
+            },
+            "horses": {
+              "male": 288,
+              "female": 432,
+              "young": 144
+            }
+          },
+          "positive_foci": {
+            "total_foci": 0,
+            "active_foci": 0,
+            "controlled_foci": 0,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 89,
+            "confirmed_negative": 89,
+            "under_investigation": 0
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة الباحة": {
+          "livestock_count": {
+            "cattle": 9800,
+            "goats": 52400,
+            "sheep": 76800,
+            "camels": 3200,
+            "horses": 450
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 3920,
+              "female": 5880,
+              "young": 1960
+            },
+            "goats": {
+              "male": 20960,
+              "female": 31440,
+              "young": 13070
+            },
+            "sheep": {
+              "male": 30720,
+              "female": 46080,
+              "young": 19160
+            },
+            "camels": {
+              "male": 1280,
+              "female": 1920,
+              "young": 640
+            },
+            "horses": {
+              "male": 180,
+              "female": 270,
+              "young": 90
+            }
+          },
+          "positive_foci": {
+            "total_foci": 1,
+            "active_foci": 0,
+            "controlled_foci": 1,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 67,
+            "confirmed_negative": 66,
+            "under_investigation": 1
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        },
+        "منطقة الجوف": {
+          "livestock_count": {
+            "cattle": 13600,
+            "goats": 72800,
+            "sheep": 105400,
+            "camels": 19800,
+            "horses": 680
+          },
+          "livestock_details": {
+            "cattle": {
+              "male": 5440,
+              "female": 8160,
+              "young": 2720
+            },
+            "goats": {
+              "male": 29120,
+              "female": 43680,
+              "young": 18145
+            },
+            "sheep": {
+              "male": 42160,
+              "female": 63240,
+              "young": 26285
+            },
+            "camels": {
+              "male": 7920,
+              "female": 11880,
+              "young": 3960
+            },
+            "horses": {
+              "male": 272,
+              "female": 408,
+              "young": 136
+            }
+          },
+          "positive_foci": {
+            "total_foci": 0,
+            "active_foci": 0,
+            "controlled_foci": 0,
+            "foci_details": []
+          },
+          "negative_foci": {
+            "total_investigated": 78,
+            "confirmed_negative": 78,
+            "under_investigation": 0
+          },
+
+          "last_updated": "2024-01-15",
+          "surveillance_status": "active"
+        }
+      }
+    }
+  },
+  "livestock_types": {
+    "cattle": { "name_ar": "أبقار", "name_en": "Cattle" },
+    "goats": { "name_ar": "ماعز", "name_en": "Goats" },
+    "sheep": { "name_ar": "ضأن", "name_en": "Sheep" },
+    "camels": { "name_ar": "إبل", "name_en": "Camels" },
+    "horses": { "name_ar": "خيل", "name_en": "Horses" }
+  },
+  "regions_mapping": {
+    "1": "منطقة الرياض",
+    "2": "منطقة مكة المكرمة",
+    "3": "منطقة المدينة المنورة",
+    "4": "منطقة القصيم",
+    "5": "المنطقة الشرقية",
+    "6": "منطقة عسير",
+    "7": "منطقة تبوك",
+    "8": "منطقة حائل",
+    "9": "منطقة الحدود الشمالية",
+    "10": "منطقة جازان",
+    "11": "منطقة نجران",
+    "12": "منطقة الباحة",
+    "13": "منطقة الجوف"
+  }
+}

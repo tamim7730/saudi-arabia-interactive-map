@@ -1,0 +1,163 @@
+{
+  "regions_statistics": [
+    {
+      "region_name": "عسير",
+      "region_name_en": "Asir",
+      "governorates_count": 12,
+      "belt_type": "برتقالي/أصفر",
+      "belt_type_en": "Orange/Yellow",
+      "positive": 34,
+      "negative": 1051,
+      "total": 1085,
+      "positive_percentage": 3.13
+    },
+    {
+      "region_name": "المنطقة الشرقية",
+      "region_name_en": "Eastern Province",
+      "governorates_count": 11,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 28,
+      "negative": 713,
+      "total": 741,
+      "positive_percentage": 3.78
+    },
+    {
+      "region_name": "الجوف",
+      "region_name_en": "Al Jawf",
+      "governorates_count": 3,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 25,
+      "negative": 415,
+      "total": 440,
+      "positive_percentage": 5.68
+    },
+    {
+      "region_name": "الحدود الشمالية",
+      "region_name_en": "Northern Borders",
+      "governorates_count": 4,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 17,
+      "negative": 601,
+      "total": 618,
+      "positive_percentage": 2.75
+    },
+    {
+      "region_name": "منطقة مكة المكرمة",
+      "region_name_en": "Makkah Province",
+      "governorates_count": 12,
+      "belt_type": "برتقالي/أصفر",
+      "belt_type_en": "Orange/Yellow",
+      "positive": 13,
+      "negative": 1119,
+      "total": 1132,
+      "positive_percentage": 1.15
+    },
+    {
+      "region_name": "الرياض",
+      "region_name_en": "Riyadh",
+      "governorates_count": 20,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 12,
+      "negative": 852,
+      "total": 864,
+      "positive_percentage": 1.39
+    },
+    {
+      "region_name": "المدينة المنورة",
+      "region_name_en": "Madinah",
+      "governorates_count": 8,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 11,
+      "negative": 759,
+      "total": 770,
+      "positive_percentage": 1.43
+    },
+    {
+      "region_name": "حائل",
+      "region_name_en": "Hail",
+      "governorates_count": 8,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 10,
+      "negative": 718,
+      "total": 728,
+      "positive_percentage": 1.37
+    },
+    {
+      "region_name": "تبوك",
+      "region_name_en": "Tabuk",
+      "governorates_count": 6,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 8,
+      "negative": 618,
+      "total": 626,
+      "positive_percentage": 1.28
+    },
+    {
+      "region_name": "الباحة",
+      "region_name_en": "Al Bahah",
+      "governorates_count": 9,
+      "belt_type": "أصفر",
+      "belt_type_en": "Yellow",
+      "positive": 8,
+      "negative": 618,
+      "total": 626,
+      "positive_percentage": 1.28
+    },
+    {
+      "region_name": "نجران",
+      "region_name_en": "Najran",
+      "governorates_count": 7,
+      "belt_type": "أصفر",
+      "belt_type_en": "Yellow",
+      "positive": 6,
+      "negative": 873,
+      "total": 879,
+      "positive_percentage": 0.68
+    },
+    {
+      "region_name": "القصيم",
+      "region_name_en": "Al Qassim",
+      "governorates_count": 12,
+      "belt_type": "أخضر",
+      "belt_type_en": "Green",
+      "positive": 5,
+      "negative": 606,
+      "total": 611,
+      "positive_percentage": 0.82
+    },
+    {
+      "region_name": "جازان",
+      "region_name_en": "Jazan",
+      "governorates_count": 17,
+      "belt_type": "أحمر/برتقالي",
+      "belt_type_en": "Red/Orange",
+      "positive": null,
+      "negative": null,
+      "total": null,
+      "positive_percentage": null
+    }
+  ],
+  "summary": {
+    "total_regions": 13,
+    "total_governorates": 149,
+    "belt_distribution": {
+      "green": 8,
+      "yellow": 2,
+      "orange_yellow": 2,
+      "red_orange": 1
+    },
+    "overall_statistics": {
+      "total_positive": 177,
+      "total_negative": 8943,
+      "total_cases": 9120,
+      "overall_positive_percentage": 1.94
+    }
+  }
+}

@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: saudi-interactive-map
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/json
+      sizeGB: 1
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /api/*
+        name: Access-Control-Allow-Origin
+        value: "*"
+      - path: /api/*
+        name: Access-Control-Allow-Methods
+        value: GET,POST,PUT,DELETE,OPTIONS
+      - path: /api/*
+        name: Access-Control-Allow-Headers
+        value: Content-Type,Authorization
+    routes:
+      - type: rewrite
+        source: /api/save-diseases-data
+        destination: /api/save-diseases-data
+      - type: rewrite
+        source: /save_diseases_data.php
+        destination: /api/save-diseases-data
+    staticPublishPath: ./
+    
+databases:
+  - name: saudi-map-db
+    databaseName: saudi_map
+    user: saudi_user
+    plan: free
+    
+redis:
+  - name: saudi-map-cache
+    plan: free

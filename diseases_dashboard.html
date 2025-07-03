@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم بيانات الأمراض الحيوانية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .card-icon {
+            font-size: 24px;
+            margin-left: 15px;
+            color: #3498db;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .livestock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .livestock-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .livestock-item label {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .livestock-item input {
+            margin-top: 5px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-info:hover {
+            background: #138496;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .status-active {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .status-inactive {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .external-sync {
+            background: #f39c12;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .sync-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .map-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .map-link:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="map-link">
+        <i class="fas fa-map"></i> العودة للخريطة
+    </a>
+    
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-chart-line"></i> لوحة تحكم بيانات الأمراض الحيوانية</h1>
+            <p>إدارة وتتبع بيانات الأمراض الحيوانية في مناطق المملكة العربية السعودية</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- إضافة بيانات مرض جديد -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-plus-circle card-icon"></i>
+                    <h3>إضافة بيانات مرض</h3>
+                </div>
+                
+                <form id="disease-form">
+                    <div class="form-group">
+                        <label for="disease-select">اختر المرض:</label>
+                        <select id="disease-select" required>
+                            <option value="">-- اختر المرض --</option>
+                            <option value="rift_valley_fever">حمى الوادي المتصدع</option>
+                            <option value="new_disease">إضافة مرض جديد</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="new-disease-name" style="display: none;">
+                        <label for="disease-name-ar">اسم المرض (عربي):</label>
+                        <input type="text" id="disease-name-ar" placeholder="مثال: حمى الوادي المتصدع">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="region-select">المنطقة:</label>
+                        <select id="region-select" required>
+                            <option value="">-- اختر المنطقة --</option>
+                            <option value="منطقة الرياض">منطقة الرياض</option>
+                            <option value="منطقة مكة المكرمة">منطقة مكة المكرمة</option>
+                            <option value="منطقة المدينة المنورة">منطقة المدينة المنورة</option>
+                            <option value="منطقة القصيم">منطقة القصيم</option>
+                            <option value="المنطقة الشرقية">المنطقة الشرقية</option>
+                            <option value="منطقة عسير">منطقة عسير</option>
+                            <option value="منطقة تبوك">منطقة تبوك</option>
+                            <option value="منطقة حائل">منطقة حائل</option>
+                            <option value="منطقة الحدود الشمالية">منطقة الحدود الشمالية</option>
+                            <option value="منطقة جازان">منطقة جازان</option>
+                            <option value="منطقة نجران">منطقة نجران</option>
+                            <option value="منطقة الباحة">منطقة الباحة</option>
+                            <option value="منطقة الجوف">منطقة الجوف</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>الثروة الحيوانية:</label>
+                        <div class="livestock-grid">
+                            <div class="livestock-item">
+                                <label>أبقار</label>
+                                <input type="number" id="cattle" min="0" value="0">
+                            </div>
+                            <div class="livestock-item">
+                                <label>ماعز</label>
+                                <input type="number" id="goats" min="0" value="0">
+                            </div>
+                            <div class="livestock-item">
+                                <label>ضأن</label>
+                                <input type="number" id="sheep" min="0" value="0">
+                            </div>
+                            <div class="livestock-item">
+                                <label>إبل</label>
+                                <input type="number" id="camels" min="0" value="0">
+                            </div>
+                            <div class="livestock-item">
+                                <label>خيل</label>
+                                <input type="number" id="horses" min="0" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="positive-foci">عدد البؤر الإيجابية:</label>
+                        <input type="number" id="positive-foci" min="0" value="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="negative-foci">عدد البؤر السلبية:</label>
+                        <input type="number" id="negative-foci" min="0" value="0" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> حفظ البيانات
+                    </button>
+                </form>
+            </div>
+            
+            <!-- عرض البيانات المحفوظة -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-table card-icon"></i>
+                    <h3>البيانات المحفوظة</h3>
+                </div>
+                
+                <div id="data-display">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>المرض</th>
+                                <th>المنطقة</th>
+                                <th>إجمالي الثروة</th>
+                                <th>البؤر الإيجابية</th>
+                                <th>البؤر السلبية</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body">
+                            <!-- البيانات ستظهر هنا -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ربط مع مصادر خارجية -->
+        <div class="external-sync">
+            <h3><i class="fas fa-cloud-upload-alt"></i> ربط مع مصادر البيانات الخارجية</h3>
+            <p>يمكنك ربط البيانات مع Google Sheets أو مصادر أخرى لتحديث البيانات تلقائياً</p>
+            
+            <div class="sync-options">
+                <div>
+                    <label for="google-sheet-url">رابط Google Sheet:</label>
+                    <input type="url" id="google-sheet-url" placeholder="https://docs.google.com/spreadsheets/...">
+                </div>
+                <div>
+                    <label for="api-endpoint">API Endpoint:</label>
+                    <input type="url" id="api-endpoint" placeholder="https://api.example.com/diseases">
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <button class="btn btn-success" onclick="syncWithGoogleSheets()">
+                    <i class="fas fa-sync"></i> مزامنة مع Google Sheets
+                </button>
+                <button class="btn btn-primary" onclick="exportToAPI()">
+                    <i class="fas fa-upload"></i> تصدير للـ API
+                </button>
+                <button class="btn btn-danger" onclick="importFromAPI()">
+                    <i class="fas fa-download"></i> استيراد من API
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="diseases_dashboard.js"></script>
+</body>
+</html>

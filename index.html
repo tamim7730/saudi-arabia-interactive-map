@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخريطة التفاعلية للمملكة العربية السعودية</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- الهيدر العلوي -->
+    <header class="top-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="الشعار.svg" alt="الشعار" class="logo">
+                <div class="title-section">
+                    <h1>الخريطة التفاعلية للمملكة العربية السعودية</h1>
+                    <p class="subtitle">مركز وقاء - نظام المعلومات الجغرافية</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="fullscreen-btn">
+                    <i class="fas fa-expand"></i>
+                    ملء الشاشة
+                </button>
+                <button class="header-btn" id="help-btn">
+                    <i class="fas fa-question-circle"></i>
+                    المساعدة
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <!-- شريط البحث والتحكم -->
+        <div class="search-container">
+            <!-- قسم البحث -->
+            <div class="search-section">
+                <input type="text" id="search-input" placeholder="ابحث عن مدينة، محافظة، أو منطقة...">
+                <button id="search-button"><i class="fas fa-search" style="color: white;"></i> بحث</button>
+            </div>
+            
+            <!-- قسم أدوات التحكم -->
+            <div class="control-tools">
+                <button id="reset-view-button">🏠 عرض كامل</button>
+                <button id="color-control-button"><i class="fas fa-palette" style="color: white;"></i> الألوان</button>
+                <button id="epidemic-belts-button"><i class="fas fa-map-marked-alt" style="color: white;"></i> الأحزمة الوبائية</button>
+                <button id="diseasesBtn"><i class="fas fa-chart-line" style="color: white;"></i> إدارة الأمراض</button>
+            </div>
+        </div>
+        
+        <!-- Color Control Panel -->
+        <div id="color-control-panel" class="color-control-panel">
+            <div class="color-panel-header">
+                <h3>تحكم في ألوان الخريطة</h3>
+                <button id="close-color-panel" class="close-panel-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="color-controls">
+                <div class="color-group">
+                    <h4>خلفية الخريطة</h4>
+                    <div class="color-options">
+                        <button class="color-btn" data-map-style="light" title="فاتح">
+                            <div class="color-preview" style="background: #f8f9fa;"></div>
+                            فاتح
+                        </button>
+                        <button class="color-btn" data-map-style="dark" title="داكن">
+                            <div class="color-preview" style="background: #2d3748;"></div>
+                            داكن
+                        </button>
+                        <button class="color-btn" data-map-style="satellite" title="قمر صناعي">
+                            <div class="color-preview" style="background: linear-gradient(45deg, #4a5568, #2d3748);"></div>
+                            قمر صناعي
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="color-group">
+                    <h4>ألوان المناطق</h4>
+                    <div class="color-options">
+                        <button class="color-btn" data-region-color="blue" title="أخضر">
+                            <div class="color-preview" style="background: #09764c;"></div>
+                            أخضر
+                        </button>
+                        <button class="color-btn" data-region-color="green" title="أخضر">
+                            <div class="color-preview" style="background: #2ecc71;"></div>
+                            أخضر
+                        </button>
+                        <button class="color-btn" data-region-color="purple" title="بنفسجي">
+                            <div class="color-preview" style="background: #9b59b6;"></div>
+                            بنفسجي
+                        </button>
+                        <button class="color-btn" data-region-color="orange" title="برتقالي">
+                            <div class="color-preview" style="background: #e67e22;"></div>
+                            برتقالي
+                        </button>
+                    </div>
+                    <div class="custom-color-input">
+                        <label for="custom-region-color">لون مخصص:</label>
+                        <div class="color-input-group">
+                            <input type="color" id="custom-region-color" value="#09764c">
+                            <input type="text" id="custom-region-color-text" placeholder="#09764c" maxlength="7">
+                            <button type="button" id="apply-custom-region-color">تطبيق</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-group">
+                    <h4>ألوان المدن</h4>
+                    <div class="color-options">
+                        <button class="color-btn" data-city-color="red" title="أحمر">
+                            <div class="color-preview" style="background: #e74c3c;"></div>
+                            أحمر
+                        </button>
+                        <button class="color-btn" data-city-color="teal" title="أزرق مخضر">
+                            <div class="color-preview" style="background: #1abc9c;"></div>
+                            أزرق مخضر
+                        </button>
+                        <button class="color-btn" data-city-color="yellow" title="أصفر">
+                            <div class="color-preview" style="background: #f1c40f;"></div>
+                            أصفر
+                        </button>
+                        <button class="color-btn" data-city-color="pink" title="وردي">
+                            <div class="color-preview" style="background: #e91e63;"></div>
+                            وردي
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="color-group">
+                    <h4>ألوان الأحياء</h4>
+                    <div class="color-options">
+                        <button class="color-btn" data-district-color="emerald" title="زمردي">
+                            <div class="color-preview" style="background: #2ecc71;"></div>
+                            زمردي
+                        </button>
+                        <button class="color-btn" data-district-color="cyan" title="سماوي">
+                            <div class="color-preview" style="background: #00bcd4;"></div>
+                            سماوي
+                        </button>
+                        <button class="color-btn" data-district-color="lime" title="ليموني">
+                            <div class="color-preview" style="background: #8bc34a;"></div>
+                            ليموني
+                        </button>
+                        <button class="color-btn" data-district-color="indigo" title="نيلي">
+                            <div class="color-preview" style="background: #3f51b5;"></div>
+                            نيلي
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="color-group">
+                    <h4>إعادة تعيين</h4>
+                    <button id="reset-colors-btn" class="reset-btn">
+                        <i class="fas fa-undo"></i>
+                        إعادة الألوان الافتراضية
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- لوحة التحكم بالأحزمة الوبائية -->
+        <div id="epidemic-belts-panel" class="color-control-panel">
+            <div class="panel-header">
+                <h3>الأحزمة الوبائية</h3>
+                <button id="close-epidemic-belts-panel" class="close-button">×</button>
+            </div>
+            
+            <div class="control-group">
+                <label>اختر الحزام الوبائي:</label>
+                <div class="belt-options">
+                    <button class="belt-button red-belt" data-belt="red">
+                        <span class="belt-color" style="background-color: #e74c3c;"></span>
+                        الحزام الأحمر
+                        <small>حزام السيطرة على المرض - منطقة واحدة: جازان (7 محافظات)</small>
+                    </button>
+                    <button class="belt-button orange-belt" data-belt="orange">
+                        <span class="belt-color" style="background-color: #f39c12;"></span>
+                        الحزام البرتقالي
+                        <small>الحاجز المناعي - 3 مناطق: جازان، عسير، مكة المكرمة (16 محافظة)</small>
+                    </button>
+                    <button class="belt-button yellow-belt" data-belt="yellow">
+                        <span class="belt-color" style="background-color: #f1c40f;"></span>
+                        الحزام الأصفر
+                        <small>حزام المراقبة الوبائية - 4 مناطق: مكة، عسير، نجران، الباحة</small>
+                    </button>
+                    <button class="belt-button green-belt" data-belt="green">
+                        <span class="belt-color" style="background-color: #27ae60;"></span>
+                        الحزام الأخضر
+                        <small>خال من المرض - 8 مناطق: الرياض، الشرقية، القصيم، حائل، تبوك، الحدود الشمالية، الجوف، المدينة</small>
+                    </button>
+                </div>
+                
+                <button id="clear-belts-button" class="reset-button">إخفاء جميع الأحزمة</button>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <!-- الفوتر السفلي -->
+    <footer class="bottom-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="الشعار.svg" alt="الشعار" class="footer-logo-img">
+                        <span>مركز وقاء</span>
+                    </div>
+                    <p class="footer-description">نظام المعلومات الجغرافية للمملكة العربية السعودية - منصة متطورة لرصد ومتابعة البيانات الجغرافية والصحية في المملكة</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4><i class="fas fa-cogs"></i> الخدمات</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-search"></i> البحث في الخريطة</a></li>
+                            <li><a href="#"><i class="fas fa-map-marked-alt"></i> الأحزمة الوبائية</a></li>
+                            <li><a href="#"><i class="fas fa-chart-line"></i> إدارة الأمراض</a></li>
+                            <li><a href="#"><i class="fas fa-file-alt"></i> التقارير</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4><i class="fas fa-question-circle"></i> المساعدة</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-book"></i> دليل الاستخدام</a></li>
+                            <li><a href="#"><i class="fas fa-comments"></i> الأسئلة الشائعة</a></li>
+                            <li><a href="#"><i class="fas fa-tools"></i> الدعم التقني</a></li>
+                            <li><a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4><i class="fas fa-info-circle"></i> معلومات</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-project-diagram"></i> عن المشروع</a></li>
+                            <li><a href="#"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
+                            <li><a href="#"><i class="fas fa-gavel"></i> شروط الاستخدام</a></li>
+                            <li><a href="#"><i class="fas fa-exclamation-triangle"></i> إخلاء المسؤولية</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>© 2024 مركز وقاء - جميع الحقوق محفوظة | تطوير وتصميم فريق نظم المعلومات الجغرافية</p>
+                </div>
+                <div class="footer-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>13 منطقة إدارية</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-city"></i>
+                        <span>134 محافظة</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-building"></i>
+                        <span>285 مدينة ومركز</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>
