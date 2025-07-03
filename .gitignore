@@ -1,7 +1,101 @@
-# environmental files
-env
-venv
+# متغيرات البيئة
+.env
 
-# other
+# مجلدات Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# مجلدات التحميل
+uploads/
+
+# ملفات النظام
 .DS_Store
+Thumbs.db
+
+# ملفات المحرر
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ملفات السجلات
+logs/
+*.log
+
+# ملفات مؤقتة
+tmp/
+temp/
+
+# ملفات البناء
+dist/
+build/
+
+# ملفات التغطية
+coverage/
+.nyc_output/
+
+# ملفات البيانات المؤقتة
+*.tmp
+*.bak
+*.swp
+
+# ملفات الاختبار
+test-results/
+
+# ملفات خاصة بالمطور
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ملفات النسخ الاحتياطي
+backups/
+*.backup
+*.sql
+
+# ملفات الشهادات والمفاتيح
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ملفات قاعدة البيانات المحلية
+*.db
+*.sqlite
+*.sqlite3
+
+# ملفات التخزين المؤقت
+.cache/
+*.cache
+
+# ملفات الإحصائيات والتحليلات
+stats/
+analytics/
+
+# ملفات التكوين المحلية
+config.local.js
+config.local.json
+
+# ملفات الأرشيف
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# ملفات الصور المؤقتة
+*.tmp.png
+*.tmp.jpg
+*.tmp.gif
+
+# ملفات النشر
+.render/
+.vercel/
+.netlify/
+
+# ملفات Docker
+Dockerfile.local
+docker-compose.override.yml
 

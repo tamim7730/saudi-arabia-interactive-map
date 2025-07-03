@@ -1,34 +1,99 @@
-# Saudi-Arabia-Regions-Cities-and-Districts
-Raw data for Saudi Arabia's 13 regions, over 4580 cities and 3730 districts in both Arabic and English.
+# الخريطة التفاعلية للمملكة العربية السعودية
 
-* The data is public data collected from https://maps.address.gov.sa/
-* All coordinates in (Lat, Lon) aka (Y, X) format and 8 decimal points, except for MySQL files
-* Mysql files coordinates are reversed (Lon, Lat) aka (X, Y) due to the way MySQL expect it
-* Data points include:
-  - Regions, Cities and Districts.
-  - Names (Arabic & English).
-  - Regions capital city, population & center point.
-  - Regions boundaries.
-  - Districts boundaries.
-* Lite version includes all data points except GIS data (center point & boundaries).
+## نظرة عامة
+مشروع الخريطة التفاعلية للمملكة العربية السعودية هو تطبيق ويب يوفر خريطة تفاعلية للمملكة مع إمكانية عرض البيانات الوبائية والإحصائية للأمراض والثروة الحيوانية في مختلف مناطق المملكة. يستخدم المشروع تقنيات الويب الحديثة لتوفير تجربة مستخدم سلسة وفعالة.
 
+## الميزات الرئيسية
+- **خريطة تفاعلية**: عرض خريطة المملكة العربية السعودية بشكل تفاعلي مع إمكانية التكبير والتصغير والتنقل.
+- **عرض البيانات الجغرافية**: عرض المناطق والمدن والمحافظات بألوان مختلفة.
+- **نوافذ منبثقة محسنة**: نوافذ منبثقة جميلة ومنظمة عند النقر على أي منطقة مع تأثيرات بصرية جذابة.
+- **تصميم محسن**: واجهة مستخدم محسنة مع تأثيرات بصرية وتدرجات لونية جذابة.
+- **لوحة تحكم الأمراض**: إدارة بيانات الأمراض والثروة الحيوانية وعرضها على الخريطة.
+- **أحزمة وبائية**: إمكانية تحديد وعرض الأحزمة الوبائية على الخريطة.
+- **تحميل ملفات Excel**: استيراد البيانات من ملفات Excel.
+- **واجهة برمجة التطبيقات (API)**: واجهات برمجية للوصول إلى البيانات وتحديثها.
+- **تخصيص الألوان**: إمكانية تغيير ألوان الخريطة والمناطق والمدن.
+- **تصميم متجاوب**: يعمل بشكل مثالي على جميع الأجهزة والشاشات.
 
-## Data Use Cases
-This is a list of some of the open source projects based on this data:
-* [KSA Covid-19 cases map](https://github.com/0x0Faisal/Covid19-Map) by [@0x0Faisal](https://github.com/0x0Faisal).
-* [Saudi_geo_clickhouse](https://github.com/swarnkiran88/swarnkiran88) by [@swarnkiran88](https://github.com/swarnkiran88).
-* [Saudi_GIS_Data](https://github.com/usefksa/Saudi_GIS_Data) by [@usef_ksa](https://github.com/usef_ksa).
-* [Manateq - a handy library for searching and listing regions, cities and districts in Saudi Arabia](https://github.com/nuhamozaini/Manateq) by [@nuhamozaini](https://github.com/nuhamozaini).
+## المتطلبات التقنية
+- Node.js (الإصدار 18.0.0 أو أعلى)
+- متصفح ويب حديث يدعم JavaScript و HTML5
 
+## التثبيت والتشغيل
 
+### التثبيت المحلي
+1. استنساخ المستودع:
+   ```bash
+   git clone https://github.com/your-username/saudi-arabia-interactive-map.git
+   cd saudi-arabia-interactive-map
+   ```
 
-## Contributing
-All contributions are welcome! 😊
-Please only send PRs that benefit most users or have a common use case. For special use cases, please publish them to a separate repo.
+2. تثبيت الاعتمادات:
+   ```bash
+   npm install
+   ```
 
-## Issues
-If you find an issue with the data please open an issue. If you're looking for help in using the data in your own projects, please use the appropriate forums, such as StackOverflow.
+3. إعداد ملف البيئة:
+   ```bash
+   cp .env.example .env
+   ```
+   قم بتعديل ملف `.env` حسب احتياجاتك.
 
+4. تشغيل الخادم المحلي:
+   ```bash
+   npm run dev
+   ```
 
-## License
-[GPL-2.0](https://github.com/homaily/Saudi-Arabia-Regions-Cities-and-Districts/blob/master/LICENSE)
+5. افتح المتصفح على العنوان: `http://localhost:3000`
+
+### النشر على Render
+يمكن نشر المشروع بسهولة على منصة Render باستخدام ملف `render.yaml` المضمن. راجع ملف `RENDER_SETUP.md` للحصول على تعليمات مفصلة.
+
+## هيكل المشروع
+```
+./
+├── server.js                # ملف الخادم الرئيسي
+├── package.json            # تكوين المشروع واعتماداته
+├── .env.example            # نموذج لملف متغيرات البيئة
+├── render.yaml             # تكوين النشر على Render
+├── index.html              # الصفحة الرئيسية للخريطة التفاعلية
+├── diseases_dashboard.html # لوحة تحكم الأمراض
+├── style.css               # أنماط CSS الرئيسية
+├── script.js               # سكربت JavaScript الرئيسي
+├── dashboard.js            # سكربت لوحة التحكم
+├── uploads/                # مجلد لتحميل الملفات
+└── json/                   # مجلد ملفات البيانات
+    ├── regions.geojson     # بيانات المناطق
+    ├── cities.geojson      # بيانات المدن
+    ├── districts.geojson   # بيانات المحافظات
+    ├── diseases_data.json  # بيانات الأمراض
+    └── regions_statistics.json # إحصائيات المناطق
+```
+
+## واجهة برمجة التطبيقات (API)
+
+### نقاط النهاية المتاحة
+- `GET /api/diseases-data`: الحصول على بيانات الأمراض
+- `POST /api/save-diseases-data`: حفظ بيانات الأمراض
+- `POST /api/upload-excel`: تحميل ملف Excel
+- `GET /api/regions-statistics`: الحصول على إحصائيات المناطق
+- `GET /api/regions`: الحصول على بيانات المناطق
+- `GET /api/cities`: الحصول على بيانات المدن
+- `GET /api/districts`: الحصول على بيانات المحافظات
+- `GET /api/system-stats`: الحصول على إحصائيات النظام
+- `GET /api/files-check`: التحقق من وجود الملفات الضرورية
+- `GET /health`: التحقق من حالة الخادم
+
+## المساهمة
+نرحب بالمساهمات! يرجى اتباع الخطوات التالية:
+1. انشئ fork للمستودع
+2. أنشئ فرعًا جديدًا (`git checkout -b feature/amazing-feature`)
+3. قم بعمل commit للتغييرات (`git commit -m 'إضافة ميزة رائعة'`)
+4. ادفع إلى الفرع (`git push origin feature/amazing-feature`)
+5. افتح طلب سحب (Pull Request)
+
+## الترخيص
+هذا المشروع مرخص بموجب [ترخيص MIT](LICENSE).
+
+## الاتصال والدعم
+للأسئلة أو الدعم، يرجى فتح issue في المستودع أو التواصل مع فريق التطوير.

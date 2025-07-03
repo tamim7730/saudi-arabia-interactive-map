@@ -1110,16 +1110,28 @@ document.addEventListener('DOMContentLoaded', function () {
         const regionNameEn = regionProperties.name_en;
         const population = regionProperties.population || 'غير متوفر';
         
-        // إرجاع محتوى بسيط للنافذة الصغيرة (في حالة الحاجة)
+        // إرجاع محتوى محسن للنافذة الصغيرة
         return `
-            <div style="text-align: center; padding: 10px;">
-                <h4 style="margin: 0; color: #2c3e50;">${regionName}</h4>
-                <p style="margin: 5px 0; color: #6c757d; font-size: 12px;">${regionNameEn}</p>
-                <button onclick="showFullscreenPopup('${regionName}', '${regionNameEn}', '${population}')" 
-                        style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px;">
-                    <i class="fas fa-expand" style="margin-left: 5px;"></i>
-                    عرض التفاصيل
-                </button>
+            <div class="popup-content-wrapper">
+                <div class="popup-header">
+                    <h4 class="popup-region-name">${regionName}</h4>
+                    <p class="popup-region-name-en">${regionNameEn}</p>
+                </div>
+                
+                <div class="popup-info">
+                    <div class="popup-population">
+                        <i class="fas fa-users popup-icon"></i>
+                        <span class="popup-population-text">عدد السكان: ${population}</span>
+                    </div>
+                </div>
+                
+                <div class="popup-actions">
+                    <button onclick="showFullscreenPopup('${regionName}', '${regionNameEn}', '${population}')" 
+                            class="popup-details-btn">
+                        <i class="fas fa-expand popup-btn-icon"></i>
+                        <span>عرض التفاصيل الكاملة</span>
+                    </button>
+                </div>
             </div>
         `;
     }

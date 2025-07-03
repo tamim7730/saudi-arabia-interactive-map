@@ -1009,6 +1009,33 @@ body {
 /* ========================================
    11. الفوتر الجديد (New Footer)
 ======================================== */
+.bottom-footer {
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 25%, #0d4d35 50%, #1a2332 75%, #0f1419 100%);
+    color: white;
+    padding: 0;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid #09764c;
+}
+
+.bottom-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 15% 85%, rgba(9, 118, 76, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(9, 118, 76, 0.12) 0%, transparent 45%),
+        radial-gradient(ellipse at center, rgba(9, 118, 76, 0.08) 0%, transparent 70%),
+        linear-gradient(45deg, transparent 0%, rgba(9, 118, 76, 0.03) 50%, transparent 100%);
+    pointer-events: none;
+    animation: footerGlow 8s ease-in-out infinite alternate;
+}
+
 .footer {
     background: linear-gradient(135deg, #0f1419 0%, #1a2332 25%, #0d4d35 50%, #1a2332 75%, #0f1419 100%);
     color: white;
@@ -1077,11 +1104,29 @@ body {
 }
 
 .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-logo-img {
     height: 70px;
     width: auto;
     filter: brightness(0) invert(1) drop-shadow(0 6px 15px rgba(9, 118, 76, 0.4));
     transition: all 0.4s ease;
     animation: logoFloat 3s ease-in-out infinite;
+}
+
+.footer-logo span {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f9fafb;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #f9fafb 0%, #09764c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 @keyframes logoFloat {
@@ -1093,7 +1138,7 @@ body {
     }
 }
 
-.footer-logo:hover {
+.footer-logo-img:hover {
     transform: scale(1.1) translateY(-3px) rotate(5deg);
     filter: brightness(0) invert(1) drop-shadow(0 10px 25px rgba(9, 118, 76, 0.6));
 }
@@ -1205,17 +1250,19 @@ body {
 }
 
 .link-group a {
-    color: #d1d5db;
+    color: #e5e7eb;
     text-decoration: none;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 12px;
-    border-radius: 8px;
+    padding: 10px 15px;
+    border-radius: 10px;
     position: relative;
     overflow: hidden;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .link-group a::before {
@@ -1234,11 +1281,25 @@ body {
 }
 
 .link-group a:hover {
-    color: #09764c;
-    background: rgba(9, 118, 76, 0.15);
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(9, 118, 76, 0.25) 0%, rgba(9, 118, 76, 0.15) 100%);
     transform: translateX(-8px);
-    box-shadow: 0 4px 12px rgba(9, 118, 76, 0.2);
+    box-shadow: 0 6px 20px rgba(9, 118, 76, 0.3);
     font-weight: 600;
+    border: 1px solid rgba(9, 118, 76, 0.3);
+}
+
+.link-group a i {
+    color: #09764c;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.link-group a:hover i {
+    color: #ffffff;
+    transform: scale(1.1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .link-group a::after {
@@ -1256,18 +1317,19 @@ body {
 }
 
 .footer-bottom {
-    border-top: 2px solid rgba(9, 118, 76, 0.3);
-    padding: 25px 0;
+    border-top: 2px solid rgba(9, 118, 76, 0.5);
+    padding: 30px 20px;
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
+    gap: 25px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(9, 118, 76, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%);
+    border-radius: 20px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .footer-bottom::before {
@@ -1300,10 +1362,11 @@ body {
 
 .copyright p {
     margin: 0;
-    color: #cbd5e0;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: #f3f4f6;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.3px;
 }
 
 .footer-stats {
@@ -1318,15 +1381,17 @@ body {
 .stat-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
-    background: linear-gradient(135deg, rgba(9, 118, 76, 0.1) 0%, rgba(9, 118, 76, 0.05) 100%);
-    border-radius: 25px;
-    border: 2px solid rgba(9, 118, 76, 0.2);
+    gap: 12px;
+    padding: 15px 22px;
+    background: linear-gradient(135deg, rgba(9, 118, 76, 0.2) 0%, rgba(9, 118, 76, 0.1) 100%);
+    border-radius: 30px;
+    border: 2px solid rgba(9, 118, 76, 0.4);
     transition: all 0.4s ease;
-    min-width: 140px;
+    min-width: 160px;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(9, 118, 76, 0.2);
 }
 
 .stat-item::before {
@@ -1346,37 +1411,41 @@ body {
 }
 
 .stat-item:hover {
-    background: linear-gradient(135deg, rgba(9, 118, 76, 0.2) 0%, rgba(9, 118, 76, 0.1) 100%);
-    border-color: rgba(9, 118, 76, 0.5);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(9, 118, 76, 0.3);
+    background: linear-gradient(135deg, rgba(9, 118, 76, 0.35) 0%, rgba(9, 118, 76, 0.25) 100%);
+    border-color: rgba(9, 118, 76, 0.7);
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 12px 35px rgba(9, 118, 76, 0.4);
 }
 
 .stat-item i {
-    font-size: 1.2rem;
-    color: #09764c;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 1.4rem;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(9, 118, 76, 0.8), 0 0 15px rgba(9, 118, 76, 0.5);
     position: relative;
     z-index: 2;
     animation: iconPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(9, 118, 76, 0.6));
 }
 
 @keyframes iconPulse {
     0%, 100% {
         transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(9, 118, 76, 0.6));
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 15px rgba(9, 118, 76, 0.8));
     }
 }
 
 .stat-item span {
-    font-size: 0.95rem;
-    color: #f9fafb;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
     position: relative;
     z-index: 2;
+    letter-spacing: 0.5px;
 }
 
 
@@ -1844,10 +1913,597 @@ body {
     border-radius: 15px !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
     border: 2px solid rgba(9, 118, 76, 0.1) !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fffe 50%, #f0fdf9 100%) !important;
+    backdrop-filter: blur(10px) !important;
 }
 
 .leaflet-popup-tip {
     border-top-color: rgba(9, 118, 76, 0.1) !important;
+}
+
+/* تنسيق النافذة المنبثقة للمناطق */
+.region-popup .leaflet-popup-content {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.region-popup .leaflet-popup-content > div {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fffe 50%, #f0fdf9 100%);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.region-popup h4 {
+    margin: 0 0 8px 0 !important;
+    color: #09764c !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.region-popup p {
+    margin: 5px 0 15px 0 !important;
+    color: #6b7280 !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+.region-popup button {
+    background: linear-gradient(135deg, #09764c 0%, #0a8555 50%, #065a3a 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 15px rgba(9, 118, 76, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.region-popup button::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s !important;
+}
+
+.region-popup button:hover {
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(9, 118, 76, 0.4) !important;
+}
+
+.region-popup button:hover::before {
+    left: 100% !important;
+}
+
+.region-popup button i {
+    margin-left: 8px !important;
+    font-size: 0.9rem !important;
+    transition: transform 0.3s ease !important;
+}
+
+.region-popup button:hover i {
+    transform: scale(1.2) !important;
+}
+
+/* تنسيق محتوى النافذة المنبثقة الصغيرة المحسن */
+.popup-content-wrapper {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fffe 50%, #f0fdf9 100%) !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    text-align: center !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    overflow: hidden !important;
+}
+
+.popup-header {
+    background: linear-gradient(135deg, #09764c 0%, #0a8555 100%) !important;
+    color: white !important;
+    padding: 15px 20px !important;
+    margin: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    position: relative !important;
+}
+
+.popup-header::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%) !important;
+    pointer-events: none !important;
+}
+
+.popup-region-name {
+    margin: 0 0 5px 0 !important;
+    color: white !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.popup-region-name-en {
+    margin: 0 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    font-style: italic !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.popup-info {
+    padding: 15px 20px !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.popup-population {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
+    padding: 10px 15px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(9, 118, 76, 0.2) !important;
+}
+
+.popup-icon {
+    color: #09764c !important;
+    font-size: 1rem !important;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) !important;
+}
+
+.popup-population-text {
+    color: #065a3a !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+}
+
+.popup-actions {
+    padding: 15px 20px 20px 20px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+.popup-details-btn {
+    background: linear-gradient(135deg, #09764c 0%, #0a8555 50%, #065a3a 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 15px rgba(9, 118, 76, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+.popup-details-btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s !important;
+}
+
+.popup-details-btn:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 25px rgba(9, 118, 76, 0.4) !important;
+}
+
+.popup-details-btn:hover::before {
+    left: 100% !important;
+}
+
+.popup-btn-icon {
+    font-size: 0.9rem !important;
+    transition: transform 0.3s ease !important;
+}
+
+.popup-details-btn:hover .popup-btn-icon {
+    transform: scale(1.2) rotate(15deg) !important;
+}
+
+.popup-details-btn span {
+    font-weight: 600 !important;
+}
+
+/* ========================================
+   16. تنسيق محتوى النافذة المنبثقة الكبيرة
+======================================== */
+
+/* تنسيق محتوى النافذة المنبثقة الكبيرة */
+.fullscreen-popup-content {
+    padding: 30px;
+}
+
+.region-info-section {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdf9 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(9, 118, 76, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.region-header {
+    text-align: center;
+}
+
+.region-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #09764c;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.region-name-en {
+    font-size: 1.2rem;
+    color: #6b7280;
+    margin: 0 0 15px 0;
+    font-style: italic;
+}
+
+.region-population {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #09764c 0%, #0a8555 100%);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(9, 118, 76, 0.3);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #09764c;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 3px solid rgba(9, 118, 76, 0.2);
+}
+
+/* تنسيق شبكة الثروة الحيوانية */
+.livestock-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(9, 118, 76, 0.1);
+}
+
+.livestock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.livestock-item {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0fdf9 100%);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid rgba(9, 118, 76, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.livestock-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(9, 118, 76, 0.05) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.livestock-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(9, 118, 76, 0.15);
+    border-color: rgba(9, 118, 76, 0.3);
+}
+
+.livestock-item:hover::before {
+    opacity: 1;
+}
+
+.livestock-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.livestock-type {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #09764c;
+    margin: 10px 0;
+}
+
+.livestock-count {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #065a3a;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.total-livestock {
+    background: linear-gradient(135deg, #09764c 0%, #0a8555 50%, #065a3a 100%);
+    color: white;
+    border-color: #09764c;
+}
+
+.total-livestock .livestock-type,
+.total-livestock .livestock-count {
+    color: white;
+}
+
+/* تنسيق قسم المسوحات */
+.surveys-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(9, 118, 76, 0.1);
+}
+
+.surveys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.survey-card {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0fdf9 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid rgba(9, 118, 76, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.survey-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(9, 118, 76, 0.05) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.survey-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(9, 118, 76, 0.15);
+    border-color: rgba(9, 118, 76, 0.3);
+}
+
+.survey-card:hover::before {
+    opacity: 1;
+}
+
+.survey-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(9, 118, 76, 0.1);
+}
+
+.survey-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #09764c;
+    margin: 0;
+}
+
+.survey-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-completed {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+}
+
+.status-pending {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+}
+
+.status-cancelled {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+}
+
+.survey-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.survey-detail {
+    text-align: center;
+}
+
+.survey-detail-label {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+}
+
+.survey-detail-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #09764c;
+    margin: 0;
+}
+
+.prevalence-high {
+    color: #dc2626 !important;
+}
+
+.prevalence-medium {
+    color: #f59e0b !important;
+}
+
+.prevalence-low {
+    color: #10b981 !important;
+}
+
+/* تنسيق قسم الحشرات */
+.insects-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(9, 118, 76, 0.1);
+}
+
+.insects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.insect-card {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0fdf9 100%);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid rgba(9, 118, 76, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.insect-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(9, 118, 76, 0.05) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.insect-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(9, 118, 76, 0.15);
+    border-color: rgba(9, 118, 76, 0.3);
+}
+
+.insect-card:hover::before {
+    opacity: 1;
+}
+
+.insect-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.insect-type {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #09764c;
+    margin: 10px 0;
+}
+
+.insect-count {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #065a3a;
+    margin: 10px 0;
+}
+
+.insect-status {
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* إضافة زر الإغلاق المحسن */
+.fullscreen-popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.fullscreen-popup-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* ========================================

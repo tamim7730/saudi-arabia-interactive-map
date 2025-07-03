@@ -3,14 +3,30 @@ services:
     name: saudi-interactive-map
     env: node
     plan: free
-    buildCommand: npm install
+    buildCommand: |
+      npm ci --production
+      npm run build
     startCommand: npm start
     healthCheckPath: /health
+    healthCheckTimeout: 300
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
+      - key: ENABLE_COMPRESSION
+        value: true
+      - key: ENABLE_HELMET
+        value: true
+      - key: RATE_LIMIT_MAX
+        value: 200
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: MAX_FILE_SIZE
+        value: 50
+      - key: LOG_LEVEL
+        value: info
     disk:
       name: data
       mountPath: /opt/render/project/src/json
@@ -18,10 +34,19 @@ services:
     headers:
       - path: /*
         name: X-Frame-Options
-        value: SAMEORIGIN
+        value: DENY
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
+      - path: /*
+        name: X-XSS-Protection
+        value: "1; mode=block"
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' https://cdnjs.cloudflare.com; frame-ancestors 'none'"
       - path: /api/*
         name: Access-Control-Allow-Origin
         value: "*"
@@ -30,7 +55,10 @@ services:
         value: GET,POST,PUT,DELETE,OPTIONS
       - path: /api/*
         name: Access-Control-Allow-Headers
-        value: Content-Type,Authorization
+        value: Content-Type,Authorization,X-Requested-With
+      - path: /api/*
+        name: Cache-Control
+        value: no-cache, no-store, must-revalidate
     routes:
       - type: rewrite
         source: /api/save-diseases-data
@@ -38,6 +66,10 @@ services:
       - type: rewrite
         source: /save_diseases_data.php
         destination: /api/save-diseases-data
+      - type: redirect
+        source: /dashboard
+        destination: /diseases_dashboard.html
+        status: 301
     staticPublishPath: ./
     
 databases:

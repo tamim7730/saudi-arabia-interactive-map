@@ -4,14 +4,37 @@ const bodyParser = require('body-parser');
 const fs = require('fs-extra');
 const path = require('path');
 const multer = require('multer');
+const compression = require('compression');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const xlsx = require('xlsx');
+const dotenv = require('dotenv');
+
+// تحميل متغيرات البيئة من ملف .env إذا كان موجوداً
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// تكوين حدود الطلبات لمنع هجمات DDoS
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 دقيقة
+  max: 100, // الحد الأقصى للطلبات لكل IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'تم تجاوز الحد المسموح من الطلبات، يرجى المحاولة لاحقاً' }
+});
+
 // Middleware
+app.use(helmet({
+  contentSecurityPolicy: false, // تعطيل سياسة أمان المحتوى لتجنب مشاكل مع الخرائط
+  crossOriginEmbedderPolicy: false // تعطيل سياسة تضمين المصادر المتعددة
+}));
+app.use(compression()); // ضغط الاستجابات
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use('/api', limiter); // تطبيق حدود الطلبات على مسارات API فقط
 
 // إعداد multer لرفع الملفات
 const upload = multer({ dest: 'uploads/' });
@@ -97,7 +120,7 @@ app.get('/api/diseases-data', async (req, res) => {
   }
 });
 
-// API لرفع ملفات Excel
+// API لرفع ملفات Excel ومعالجتها
 app.post('/api/upload-excel', upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
@@ -107,15 +130,43 @@ app.post('/api/upload-excel', upload.single('file'), async (req, res) => {
       });
     }
 
-    // معالجة الملف هنا (يمكن إضافة مكتبة xlsx لقراءة Excel)
+    // التحقق من نوع الملف
+    const fileExtension = path.extname(req.file.originalname).toLowerCase();
+    if (!['.xlsx', '.xls', '.csv'].includes(fileExtension)) {
+      return res.status(400).json({
+        success: false,
+        message: 'نوع الملف غير مدعوم. يرجى رفع ملف Excel (.xlsx, .xls) أو CSV'
+      });
+    }
+
+    // قراءة ملف Excel
+    const workbook = xlsx.readFile(req.file.path);
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const jsonData = xlsx.utils.sheet_to_json(worksheet);
+
+    // حفظ البيانات المستخرجة في ملف JSON
+    const outputPath = path.join('json', 'excel_data.json');
+    await fs.ensureDir('json');
+    await fs.writeJson(outputPath, jsonData, { spaces: 2, encoding: 'utf8' });
+
+    // حذف الملف المؤقت بعد المعالجة
+    await fs.remove(req.file.path);
+
     res.json({
       success: true,
-      message: 'تم رفع الملف بنجاح',
-      filename: req.file.originalname
+      message: 'تم رفع الملف ومعالجته بنجاح',
+      filename: req.file.originalname,
+      records: jsonData.length,
+      data: jsonData.slice(0, 5) // إرجاع أول 5 سجلات كعينة
     });
     
   } catch (error) {
     console.error('خطأ في رفع الملف:', error);
+    // محاولة حذف الملف المؤقت في حالة الخطأ
+    if (req.file && req.file.path) {
+      try { await fs.remove(req.file.path); } catch (e) { /* تجاهل أي خطأ */ }
+    }
     res.status(500).json({
       success: false,
       message: error.message
@@ -212,11 +263,57 @@ app.use((err, req, res, next) => {
   });
 });
 
+// API لإحصائيات النظام
+app.get('/api/system-stats', (req, res) => {
+  const stats = {
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    memory: process.memoryUsage(),
+    cpu: process.cpuUsage(),
+    node_version: process.version,
+    platform: process.platform,
+    arch: process.arch
+  };
+  res.json(stats);
+});
+
+// API للتحقق من توفر الملفات
+app.get('/api/files-check', async (req, res) => {
+  try {
+    const files = [
+      'json/regions.json',
+      'json/cities.json',
+      'json/districts.json',
+      'json/diseases_data.json',
+      'geojson/regions.geojson',
+      'geojson/cities.geojson',
+      'geojson/districts.geojson'
+    ];
+    
+    const results = {};
+    for (const file of files) {
+      results[file] = await fs.pathExists(file);
+    }
+    
+    res.json({
+      success: true,
+      files: results
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
 // بدء الخادم
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 الخادم يعمل على المنفذ ${PORT}`);
   console.log(`🌐 الرابط: http://localhost:${PORT}`);
   console.log(`📊 لوحة التحكم: http://localhost:${PORT}/diseases_dashboard.html`);
+  console.log(`🔍 فحص الصحة: http://localhost:${PORT}/health`);
+  console.log(`📈 إحصائيات النظام: http://localhost:${PORT}/api/system-stats`);
 });
 
 // معالجة إغلاق الخادم بشكل صحيح

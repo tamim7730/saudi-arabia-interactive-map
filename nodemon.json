@@ -1,0 +1,20 @@
+{
+  "watch": [
+    "server.js",
+    "json/",
+    "*.js"
+  ],
+  "ignore": [
+    "node_modules/",
+    "uploads/",
+    "logs/",
+    "*.log",
+    "*.tmp"
+  ],
+  "ext": "js,json,html,css",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "delay": "1000",
+  "verbose": true
+}
